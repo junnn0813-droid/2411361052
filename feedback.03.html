@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <title>意見回饋表單</title>
+    <style>
+        body {
+            font-family: "Microsoft JhengHei", sans-serif;
+            margin: 30px;
+        }
+        form {
+            width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        textarea {
+            width: 100%;
+            height: 80px;
+        }
+        select, input, button {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>意見回饋表單</h1>
+    <form action="#" method="post">
+        <label for="name">姓名：</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">電子郵件：</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="category">問題分類：</label>
+        <select id="category" name="category">
+            <option>網站使用</option>
+            <option>商品相關</option>
+            <option>其他意見</option>
+        </select>
+
+        <label for="message">問題描述：</label>
+        <textarea id="message" name="message"></textarea>
+
+        <button type="submit">送出</button>
+        <button type="reset">重設</button>
+    </form>
+</body>
+</html>
