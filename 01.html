@@ -1,24 +1,127 @@
-<!DOCTYPE html>>
-<html>
-    <head>
-        <meta charset="utf=8">
-    <style>
-        h1 {text-decoration: underline; text-align: center;}
-          p {text-indent: 30px;}
-    </style>
-    </head>
-    <body>
-        <h1>無題-李商隱</h1>
-        <p>相見時難別亦難，東風無力百花殘。春蠶到死絲方盡，蠟炬成灰淚始乾。曉鏡但愁雲鬢改，蓬萊此去無多路，青鳥殷勤為探看。</p>
-        <h1>無題-李商隱</h1>
-        <p style="text-decoration: line-through;">
-            相見時難別亦難，東風無力百花殘。春蠶到死絲方盡，蠟炬成灰淚始乾。曉鏡但愁雲鬢改，蓬萊此去無多路，青鳥殷勤為探看。
-        </p>
-        <p style="text-transform: capitalize;">
-            相見時難別亦難，東風無力百花殘。春蠶到死絲方盡，蠟炬成灰淚始乾。曉鏡但愁雲鬢改，蓬萊此去無多路，青鳥殷勤為探看。
-        </p>
-        <p style="text-shadow: overline;">
-            相見時難別亦難，東風無力百花殘。春蠶到死絲方盡，蠟炬成灰淚始乾。曉鏡但愁雲鬢改，蓬萊此去無多路，青鳥殷勤為探看。
-        </p>
-    </body>
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>學生旅遊行程規劃工具</title>
+  <style>
+    body {
+      font-family: "Noto Sans TC", sans-serif;
+      background: #fff7ed;
+      margin: 0;
+    }
+    header {
+      background: #f97316;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    .form {
+      max-width: 480px;
+      background: white;
+      margin: 40px auto;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      margin-top: 22px;
+      width: 100%;
+      padding: 12px;
+      background: #f97316;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 17px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 25px;
+      background: #ffedd5;
+      padding: 18px;
+      border-radius: 12px;
+      line-height: 1.8;
+      text-align: left;
+    }
+    .level {
+      font-weight: bold;
+      color: #9a3412;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>學生旅遊行程規劃工具</h1>
+  <p>請輸入預算與天數</p>
+</header>
+
+<div class="form">
+  <label>旅遊天數</label>
+  <input type="number" id="days" placeholder="例如：3">
+
+  <label>總預算（元）</label>
+  <input type="number" id="budget" placeholder="例如：9000">
+
+  <button onclick="plan()">自動產生建議</button>
+
+  <div class="result" id="output"></div>
+</div>
+
+<script>
+function plan() {
+  const days = document.getElementById("days").value;
+  const budget = document.getElementById("budget").value;
+
+  if (days <= 0 || budget <= 0) {
+    document.getElementById("output").innerHTML =
+      "⚠️請輸入正確的天數與預算";
+    return;
+  }
+
+  const perDay = budget / days;
+  let stay = "";
+  let transport = "";
+
+  if (perDay < 1200) {
+    stay = "青年旅館";
+    transport = "公車 / 捷運";
+  } else if (perDay < 2000) {
+    stay = "民宿";
+    transport = "火車";
+  } else if (perDay < 3000) {
+    stay = "平價飯店";
+    transport = "火車＋捷運";
+  } else {
+    stay = "高級飯店";
+    transport = "高鐵或快速交通";
+  }
+
+  document.getElementById("output").innerHTML = `
+    📅 <span class="level">旅遊天數：</span>${days} 天<br>
+    💰 <span class="level">總預算：</span>${budget} 元<br>
+    📊 <span class="level">每日預算：</span>${perDay.toFixed(0)} 元<br><br>
+
+    🏨 <span class="level">住宿等級：</span>${stay}<br>
+    🚄 <span class="level">交通方式：</span>${transport}<br><br>
+
+    👉 依學生旅遊常見消費水準自動推定
+  `;
+}
+</script>
+
+</body>
 </html>
